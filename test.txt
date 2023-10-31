@@ -1,0 +1,61 @@
+int BinarySearch(vector<int>& arr,int s,int e,int key)
+{
+    int mid=s+(e-s)/2;
+    int ans=-1;
+    while(s<=e)
+    {
+       if(arr[mid]==key)
+       {
+           ans=mid;
+       }
+       else if(arr[mid]<key)
+       {
+           s=mid+1;
+       }
+       else{
+           e=mid-1;
+       }
+       mid=s+(e-s)/2;
+    }
+    return ans;
+}
+
+int pivotNo(vector<int>& arr,int n)
+{
+    int s=0,e=n-1,mid,ans=-1;
+    mid=s+(e-s)/2;
+    while(s<e)
+    {
+        if(arr[mid]>arr[0])
+        {
+            s=mid+1;
+        }
+        else{
+            e=mid;
+        }
+        mid=s+(e-s)/2;
+    }
+    return s;
+}
+
+
+
+
+int search(vector<int>& arr, int n, int k)
+{
+    // Write your code here.
+    // Return the position of K in ARR else return -1.
+
+    int pivot=pivotNo(arr,n);
+    
+
+    if(arr[pivot]<=k && k<=arr[n-1])
+    {
+       return BinarySearch(arr,pivot,n,k);
+    }
+
+    else{
+        return BinarySearch(arr,0,pivot-1,k);
+    }
+    
+}
